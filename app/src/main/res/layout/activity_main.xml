@@ -55,26 +55,46 @@
         app:layout_constraintTop_toBottomOf="@+id/insertar"
         tools:layout_editor_absoluteX="0dp"></Button>
 
+
     <TextView
         android:id="@+id/txt_mostrar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="11dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mostrar"></TextView>
-
+        app:layout_constraintTop_toBottomOf="@+id/mostrar"
+        app:layout_constraintVertical_bias="0.242"></TextView>
 
     <Switch
         android:id="@+id/switch_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="76dp"
-        android:text="@string/external"
+        android:layout_marginBottom="32dp"
         android:onClick="cambiarDireccion"
+        android:text="@string/external"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.874"
-        app:layout_constraintStart_toStartOf="parent"></Switch>
+        app:layout_constraintHorizontal_bias="0.924"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mostrar"
+        app:layout_constraintVertical_bias="0.99"></Switch>
+
+    <Button
+        android:id="@+id/btnBorrar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="56dp"
+        android:layout_marginRight="56dp"
+        android:layout_marginBottom="24dp"
+        android:onClick="removeFile"
+        android:text="@string/delete"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/switch_btn"
+        app:layout_constraintHorizontal_bias="0.425"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mostrar"
+        app:layout_constraintVertical_bias="0.961"></Button>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

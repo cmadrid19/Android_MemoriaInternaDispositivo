@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">MemoriaInternaDispositivo</string>
     <string name="external">Memoria externa</string>
+    <string name="delete">Borrar archivo</string>
 </resources>

@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         nombreFichero_et = findViewById(R.id.editText);
         texto_et = findViewById(R.id.editText2);
         textoMostrar_tv = findViewById(R.id.txt_mostrar);
-
+        switchBtn = findViewById(R.id.switch_btn);
 
     }
 
@@ -46,10 +46,10 @@ public class MainActivity extends AppCompatActivity {
             try {
                 //escribir
                 //Distinguir entre interna y externa
-                if (switchBtn.isChecked()){ //externa
-                    File file = new File(getExternalFilesDir(null),nombreFichero);
+                if (switchBtn.isChecked()) { //externa
+                    File file = new File(getExternalFilesDir(null), nombreFichero);
                     fichero = new OutputStreamWriter(new FileOutputStream(file));
-                }else{ // interna
+                } else { // interna
                     fichero = new OutputStreamWriter(openFileOutput(nombreFichero, this.MODE_APPEND)); //Append para escribir
                 }
 
@@ -78,10 +78,10 @@ public class MainActivity extends AppCompatActivity {
             BufferedReader fichero = null;
             try {
                 //Distinguir entre interna y externa
-                if (switchBtn.isChecked()){ //externa
+                if (switchBtn.isChecked()) { //externa
                     File file = new File(getExternalFilesDir(null), nombreFichero);
                     fichero = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
-                }else{ // interna
+                } else { // interna
                     fichero = new BufferedReader(new InputStreamReader(openFileInput(nombreFichero)));
                 }
 
@@ -107,16 +107,46 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void cambiarDireccion(View view){
+    public void cambiarDireccion(View view) {
+
+        //TODO arregalr esta parte, si el switch está on --> existe un SD Card
         switchBtn = findViewById(R.id.switch_btn);
-        if (switchBtn.isChecked() == false){
+        if (Environment.getExternalStorageState() != Environment.MEDIA_MOUNTED) {
+            switchBtn.setActivated(false);
+            Toast.makeText(this, "Escribiendo en SD...", Toast.LENGTH_SHORT).show();
+        } else {
+            switchBtn.setActivated(true);
+            Toast.makeText(this, "No hay ninguna SD montada.", Toast.LENGTH_SHORT).show();
+        }
+        if (switchBtn.isChecked() == false) {
             //esta montado o no?
-            if (Environment.getExternalStorageState() != Environment.MEDIA_MOUNTED){
-                switchBtn.setChecked(false);
-                Toast.makeText(this, "No hay ninguna SD montada.", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(this, "Escribiendo en SD...", Toast.LENGTH_SHORT).show();
+            switchBtn.setText("Interna");
+        } else {
+            switchBtn.setText("Externa");
+        }
+
+    }
+
+
+
+    public void removeFile(View view) {
+        String nombreFichero = nombreFichero_et.getText().toString();
+        if (!nombreFichero.matches("") || !nombreFichero.matches(null)) {
+
+            File file = null;
+            if (switchBtn.isChecked()) { // Externo
+                file = new File(getExternalFilesDir(null), nombreFichero);
+            } else { // Interno
+                file = new File("/data/data/com.example.memoriainternadispositivo/files/", nombreFichero);
             }
+
+            //Buscar file ; internal storage
+            if (file.exists()) {
+                file.delete();
+            } else {
+                Toast.makeText(this, "Fichero no encontrado", Toast.LENGTH_SHORT).show();
+            }
+
         }
     }
 }
