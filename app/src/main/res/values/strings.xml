@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MemoriaInternaDispositivo</string>
+    <string name="external">Memoria externa</string>
 </resources>
